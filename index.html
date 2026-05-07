@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foco Marketing — Central de Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #EAEAEA;
+      --white: #FFFFFF;
+      --navy: #002055;
+      --navy2: #003580;
+      --blue: #1565C0;
+      --blue2: #1976D2;
+      --blue3: #2196F3;
+      --blue4: #0057D9;
+      --badge-bg: #EBF2FF;
+      --divider: rgba(0,53,128,0.12);
+      --shadow: 0 2px 12px rgba(0,53,128,0.06);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Nunito Sans', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── LEFT PANEL ── */
+    .panel-left {
+      flex: 1 1 62%;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px 64px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Corner square decoration */
+    .deco-square-outer {
+      position: absolute;
+      top: -28px;
+      left: -28px;
+      width: 88px;
+      height: 88px;
+      background: var(--white);
+      border-radius: 6px;
+    }
+    .deco-square-inner {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 44px;
+      height: 44px;
+      background: var(--bg);
+      border-radius: 4px;
+    }
+
+    /* Bottom gradient accent */
+    .deco-footer-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue4) 0%, transparent 70%);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--blue);
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+    }
+
+    .main-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .sub-title {
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--blue2);
+      margin-bottom: 48px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Divider */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--blue);
+      margin-bottom: 40px;
+      border-radius: 2px;
+    }
+
+    /* Links list */
+    .links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--divider);
+      text-decoration: none;
+      transition: box-shadow 0.2s ease, transform 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+
+    .link-card:hover {
+      box-shadow: 0 6px 28px rgba(0,53,128,0.13);
+      transform: translateY(-2px);
+      border-color: rgba(21,101,192,0.28);
+    }
+
+    .link-arrow {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--badge-bg);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .link-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .link-text {
+      flex: 1;
+    }
+
+    .link-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .link-url {
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--blue2);
+      opacity: 0.7;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 340px;
+    }
+
+    .link-external {
+      flex-shrink: 0;
+      opacity: 0.35;
+    }
+
+    .link-external svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .panel-right {
+      flex: 0 0 38%;
+      background: var(--navy2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top-right arc */
+    .deco-arc-top {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue2), var(--blue4));
+      opacity: 0.55;
+    }
+
+    /* Bottom-right arc */
+    .deco-arc-bottom {
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 2px solid rgba(33,150,243,0.28);
+    }
+
+    /* Small circle accent */
+    .deco-circle-sm {
+      position: absolute;
+      top: 40%;
+      left: -22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blue4);
+      opacity: 0.22;
+    }
+
+    .logo-img-wrap {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      width: 220px;
+      max-width: 80%;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+    }
+
+    .brand-divider {
+      width: 36px;
+      height: 2px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 2px;
+      margin: 24px auto;
+    }
+
+    .brand-count {
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-count span {
+      color: rgba(255,255,255,0.75);
+      font-weight: 800;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+
+      .panel-right {
+        flex: none;
+        padding: 48px 32px 36px;
+        order: -1;
+      }
+
+      .panel-left {
+        padding: 40px 24px 56px;
+      }
+
+      .link-url { max-width: 200px; }
+
+      .deco-arc-top { width: 120px; height: 120px; top: -40px; right: -40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT PANEL -->
+  <section class="panel-left">
+    <div class="deco-square-outer">
+      <div class="deco-square-inner"></div>
+    </div>
+    <div class="deco-footer-line"></div>
+
+    <div class="badge">Central de Links</div>
+
+    <h1 class="main-title">Recursos &<br/>Ferramentas</h1>
+    <p class="sub-title">Acesso rápido aos painéis e relatórios da equipe</p>
+
+    <div class="divider"></div>
+
+    <nav class="links-list" aria-label="Links principais">
+
+      <a class="link-card" href="https://anamoutinhofoco.github.io/foco-eua/" target="_blank" rel="noopener">
+        <div class="link-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-name">Expansão EUA</div>
+          <div class="link-url">anamoutinhofoco.github.io/foco-eua/</div>
+        </div>
+        <div class="link-external">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://anamoutinhofoco.github.io/dashboard-focoabril-analistas/" target="_blank" rel="noopener">
+        <div class="link-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-name">Relatório Analistas — Abril</div>
+          <div class="link-url">anamoutinhofoco.github.io/dashboard-focoabril-analistas/</div>
+        </div>
+        <div class="link-external">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://anamoutinhofoco.github.io/checklist-lancamentos/" target="_blank" rel="noopener">
+        <div class="link-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-name">Checklist Lançamentos</div>
+          <div class="link-url">anamoutinhofoco.github.io/checklist-lancamentos/</div>
+        </div>
+        <div class="link-external">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </div>
+      </a>
+
+    </nav>
+  </section>
+
+  <!-- RIGHT PANEL -->
+  <section class="panel-right">
+    <div class="deco-arc-top"></div>
+    <div class="deco-arc-bottom"></div>
+    <div class="deco-circle-sm"></div>
+
+    <div class="logo-img-wrap">
+      <img src="data:image/png;base64,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" alt="Foco Marketing" class="logo-img" />
+    </div>
+
+    <div class="brand-divider"></div>
+
+    <div class="brand-count"><span>3</span> links disponíveis</div>
+  </section>
+
+</body>
+</html>
